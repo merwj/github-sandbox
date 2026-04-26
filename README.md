@@ -1,4 +1,5 @@
 # github-sandbox
+download: https://github.com/therealaleph/MasterHttpRelayVPN-RUST/releases/download/v1.6.4/mhrv-rs-windows-amd64.zip
 
 # 📥 Download Files via Commit Message
 
