@@ -1,5 +1,5 @@
 # github-sandbox
-download: https://github.com/therealaleph/MasterHttpRelayVPN-RUST/releases/download/v1.6.4/mhrv-rs-windows-amd64.zip
+
 
 # 📥 Download Files via Commit Message
 
@@ -9,7 +9,9 @@ A GitHub Actions workflow that lets you download files into your repository just
 
 ## ⚙️ Setup
 
-0. Fork this repo
+
+
+0. Fork this repodsa
 1. Go to your repository on GitHub
 2. Click **Settings** → **Actions** → **General**
 3. Scroll down to **Workflow permissions**
