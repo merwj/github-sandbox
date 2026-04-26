@@ -25,11 +25,11 @@ jobs:
           curl -fsSL https://bun.com/install | bash
           echo "$HOME/.bun/bin" >> $GITHUB_PATH
           echo "BUN_INSTALL_DIR=$HOME/.bun" >> $GITHUB_ENV
-
-      - name: Setup YouTube cookies
-        if: success()
+      
+      - name: Setup YouTube cookies (optional)
+        if: env.YOUTUBE_COOKIES != ''
         run: |
-          echo '${{ secrets.YOUTUBE_COOKIES }}' > youtube_cookies.txt
+          echo "$YOUTUBE_COOKIES" > youtube_cookies.txt
         env:
           YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
 
@@ -156,8 +156,18 @@ jobs:
 
             elif echo "$URL" | grep -qE "(youtube\.com|youtu\.be|twitch\.tv|reddit\.com|ni长沙|pexels|soundcloud)"; then
               echo "⬇️ Downloading with yt-dlp: $URL"
-              yt-dlp --js-runtimes bun:/home/runner/.bun/bin --cookies youtube_cookies.txt -o "tmp_downloads/%(title)s.%(ext)s" "$URL"
-
+            if [ -f youtube_cookies.txt ]; then
+              yt-dlp \
+                --js-runtimes bun:/home/runner/.bun/bin \
+                --cookies youtube_cookies.txt \
+                -o "tmp_downloads/%(title)s.%(ext)s" \
+                "$URL"
+            else
+              yt-dlp \
+                --js-runtimes bun:/home/runner/.bun/bin \
+                -o "tmp_downloads/%(title)s.%(ext)s" \
+                "$URL"
+            fi            
             else
               echo "⬇️ Downloading with aria2: $URL"
               aria2c \
